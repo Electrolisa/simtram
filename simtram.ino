@@ -72,7 +72,7 @@ void loop(void)
     if (nSpeed < 65) {
       nNewSpeed = nSpeed + 1;
       nLastChanged = nCurrentTime;
-      strcpy(sTramMode, " ROZRUCH ");
+      strcpy(sTramMode, "  ACCEL  ");
     }
   }
   else if (digitalRead(nDownPin) == HIGH)
@@ -80,7 +80,7 @@ void loop(void)
     if (nSpeed > 0) {
       nNewSpeed = nSpeed - 1;
       nLastChanged = nCurrentTime; 
-      strcpy(sTramMode, "HAMOWANIE");
+      strcpy(sTramMode, " BREAKING");
     }
     else
       updateTrainSpeed(0);
@@ -88,7 +88,7 @@ void loop(void)
     if ((nCurrentTime - nLastChanged > 3000) && (nSpeed > 0)) {
       nNewSpeed = nSpeed - 1;
       nLastChanged = nCurrentTime;
-      strcpy(sTramMode, "  JAZDA  ");
+      strcpy(sTramMode, "  DRIVE  ");
     }
   }
 
@@ -96,7 +96,7 @@ void loop(void)
     updateTrainSpeed(nNewSpeed);
     
     if (nNewSpeed == 0)
-      strcpy(sTramMode, "  POSTOJ ");
+      strcpy(sTramMode, "   STOP  ");
       
     tft.setCursor(tft.width /2 - 25, tft.height / 2 - 12);
     nSpeed = nNewSpeed;
@@ -117,8 +117,8 @@ void loop(void)
     tft.print(sTramMode);
 
     tft.setTextSize(4);
-  } else if (strcmp(sTramMode, "  JAZDA  ") && (nSpeed > 0)) {
-    strcpy(sTramMode, "  JAZDA  ");
+  } else if (strcmp(sTramMode, "  DRIVE  ") && (nSpeed > 0)) {
+    strcpy(sTramMode, "  DRIVE  ");
     tft.setTextSize(1);
     tft.setCursor(tft.width / 2 - 25, tft.height / 2 + 30);
     tft.print(sTramMode);
