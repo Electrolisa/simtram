@@ -20,7 +20,7 @@ int nNewSpeed = 0;
 int nLegoSpeed = 0;
 int nLastChanged = 0;
 int nCurrentTime = 0;
-char sTramMode[] = "  POSTOJ ";
+char sTramMode[] = "   STOP  ";
 
 void updateTrainSpeed(int nSpeed) {
   if (nSpeed == 0)
