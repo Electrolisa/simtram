@@ -9,6 +9,8 @@ uint8_t pin_cs = 3, pin_rs = 5, pin_wr = 6, pin_lck = 7;
 uint8_t pin_cs = D3, pin_rs = D5, pin_wr = D6, pin_lck = D7;
 #endif
 
+#define MAX_SPEED 65
+
 DFRobot_ST7687S_Latch tft(pin_cs, pin_rs, pin_wr, pin_lck);
 LEGOPowerFunctions pf(10);
 
@@ -69,7 +71,7 @@ void loop(void)
   
   if (digitalRead(nUpPin) == HIGH)
   {
-    if (nSpeed < 65) {
+    if (nSpeed < MAX_SPEED) {
       nNewSpeed = nSpeed + 1;
       nLastChanged = nCurrentTime;
       strcpy(sTramMode, " ROZRUCH ");
@@ -102,9 +104,9 @@ void loop(void)
     nSpeed = nNewSpeed;
     if (nSpeed < 10)
       tft.print(" ");
-    if (nSpeed < 60)
+    if (nSpeed < (MAX_SPEED - 10))
       tft.setTextColor(DISPLAY_WHITE);
-    else if (nSpeed < 65)
+    else if (nSpeed < MAX_SPEED)
       tft.setTextColor(DISPLAY_YELLOW);
     else
       tft.setTextColor(DISPLAY_RED);
